@@ -1,0 +1,70 @@
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+
+
+class MyDocument extends Document {
+render() {
+return (
+<Html lang="en">
+<Head>
+{/* Global meta tags */}
+<meta name="description" content="Real Estate Worldwide - Buy, sell, rent properties across the globe" />
+<link rel="icon" href="/favicon.ico" />
+</Head>
+<body>
+<Main />
+<NextScript />
+</body>
+</Html>
+);
+}
+} 
+
+export default MyDocument;
+mport Head from 'next/head';
+import Link from 'next/link';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import SearchBar from '../components/SearchBar';
+
+
+export default function Home({}) {
+return (
+<div>
+<Head>
+<title>Real Estate Worldwide</title>
+<meta name="description" content="Global property marketplace" />
+</Head>
+<Navbar />
+<main className="container mx-auto p-6">
+<section className="hero py-12">
+<h1 className="text-4xl font-bold">Real Estate Worldwide</h1>
+<p className="mt-3">Buy, sell or rent properties around the world — Dubai, New York, London, Mumbai and more.</p>
+<SearchBar />
+</section>
+
+
+<section className="countries grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
+{['Dubai', 'New York', 'London', 'Mumbai'].map((c) => (
+<Link key={c} href={`/search?country=${encodeURIComponent(c)}`}>
+<a className="card p-4 rounded shadow">{c}</a>
+</Link>
+))}
+</section>
+</main>
+<Footer />
+</div>
+);
+}
+import { useState } from 'react';
+
+
+export default function ChatbotWidget() {
+const [open, setOpen] = useState(false);
+const [messages, setMessages] = useState([{ from: 'bot', text: 'Hi! How can I help you today?' }]);
+const [text, setText] = useState('');
+
+
+const send = async () => {
+if (!text) return;
+const userMsg = { from: 'user', text };
+setMessages((m) => [...m, userMsg
